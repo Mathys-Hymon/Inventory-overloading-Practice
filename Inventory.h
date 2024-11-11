@@ -1,21 +1,13 @@
 #pragma once
 
 #include "Item.h"
-#include <memory>
-#include <deque>
+#include <vector>
 
 
 class Inventory {
 public:
 
-    bool hasItemWithFlag(uint8_t type) const {
-        for (const auto& item : items) {
-            if (item->HasTag(type)) {
-                return true;
-            }
-        }
-        return false;
-    }
+    bool hasItemWithTag(uint8_t type) const;
 
     void removeItem(std::shared_ptr<Item> item);
 
@@ -26,5 +18,5 @@ public:
     //}
 
 private:
-    std::deque<std::shared_ptr<Item>> items;
+    std::vector<std::shared_ptr<Item>> items;
 };

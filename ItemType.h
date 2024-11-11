@@ -1,5 +1,4 @@
 #pragma once
-
 #include <cstdint>
 
 namespace ItemType {
@@ -16,19 +15,19 @@ namespace ItemType {
 		Legendary = 1 << 8,
 	};
 
-	uint8_t operator + (uint8_t const& a, Type const& b) {
+	inline uint8_t operator + (uint8_t const& a, Type const& b) {
 		return a | b;
 	}
-	uint8_t operator - (uint8_t const& a, Type const& b) {
+	inline uint8_t operator - (uint8_t const& a, Type const& b) {
 		return a ^ b;
 	}
-	void operator += (uint8_t& a, Type const& b) {
+	inline void operator += (uint8_t& a, Type const& b) {
 		a |= b;
 	}
-	void operator -= (uint8_t& a, Type const& b) {
+	inline void operator -= (uint8_t& a, Type const& b) {
 		a ^= b;
 	}
-	bool operator == (uint8_t const& a, Type const& b) {
+	inline bool operator == (uint8_t const& a, Type const& b) {
 		return a & b;
 	}
 }

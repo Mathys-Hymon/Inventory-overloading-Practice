@@ -15,13 +15,9 @@ public:
 	void removeTag(std::uint8_t type);
 
 protected:
-
 	std::uint8_t mType = 0;
 	int mPrice = 0;
 	std::string mName = " ";
 
 
 };
-
-
-
