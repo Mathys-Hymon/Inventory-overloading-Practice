@@ -1,21 +1,18 @@
 #pragma once
 
 #include "Item.h"
+#include "VectorExtensions.h"
 #include <vector>
 
 
 class Inventory {
 public:
 
-    bool hasItemWithTag(uint8_t type) const;
+    bool HasItemWithTag(uint8_t type) const;
 
-    void removeItem(std::shared_ptr<Item> item);
-
-    //void sortItemsByType() {
-    //    std::sort(items.begin(), items.end(), [](const auto& a, const auto& b) {
-    //        return a->getFlags() < b->getFlags();
-    //        });
-    //}
+    void RemoveItem(std::shared_ptr<Item> item);
+	void AddItem(std::shared_ptr<Item> item);
+	void ShowInventory() const;
 
 private:
     std::vector<std::shared_ptr<Item>> items;

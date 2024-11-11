@@ -3,8 +3,8 @@
 class IBakable {
 public:
     virtual ~IBakable() = default;
-    virtual void bake() = 0;
-	virtual uint8_t getFoodType() const = 0;
+    virtual void Bake() = 0;
+	virtual uint8_t GetFoodType() const = 0;
 };
 
 namespace foodtype

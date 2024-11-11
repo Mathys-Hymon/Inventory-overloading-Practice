@@ -1,4 +1,6 @@
 #include <iostream>
+#include "FoodProcessor.h"
+#include "Inventory.h"
 
 int main()
 {
