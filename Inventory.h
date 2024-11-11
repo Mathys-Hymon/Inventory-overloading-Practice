@@ -1,25 +1,12 @@
 #pragma once
 
 #include "Item.h"
-#include <vector>
 #include <memory>
+#include <deque>
 
-#include "Item.h"
-#include <vector>
-#include <memory>
-#include <algorithm>
 
 class Inventory {
 public:
-    Inventory& operator+=(std::shared_ptr<Item> item) {
-        items.push_back(item);
-        return *this;
-    }
-
-    Inventory& operator-=(std::shared_ptr<Item> item) {
-        items.erase(std::remove(items.begin(), items.end(), item), items.end());
-        return *this;
-    }
 
     bool hasItemWithFlag(uint8_t type) const {
         for (const auto& item : items) {
@@ -30,16 +17,14 @@ public:
         return false;
     }
 
-    void removeItem(std::shared_ptr<Item> item) {
-        items.erase(std::remove(items.begin(), items.end(), item), items.end());
-    }
+    void removeItem(std::shared_ptr<Item> item);
 
-    void sortItemsByType() {
-        std::sort(items.begin(), items.end(), [](const auto& a, const auto& b) {
-            return a->getFlags() < b->getFlags();
-            });
-    }
+    //void sortItemsByType() {
+    //    std::sort(items.begin(), items.end(), [](const auto& a, const auto& b) {
+    //        return a->getFlags() < b->getFlags();
+    //        });
+    //}
 
 private:
-    std::vector<std::shared_ptr<Item>> items;
+    std::deque<std::shared_ptr<Item>> items;
 };

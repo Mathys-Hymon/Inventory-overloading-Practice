@@ -12,6 +12,11 @@ std::uint8_t Item::GetType()
 	return mType;
 }
 
+const std::string Item::GetName()
+{
+	return mName;
+}
+
 const bool Item::HasTag(std::uint8_t type)
 {
 	return mType == type;
