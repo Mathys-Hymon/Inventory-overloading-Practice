@@ -7,13 +7,15 @@
 
 class Inventory {
 public:
+    Inventory();
+	~Inventory();
 
     bool HasItemWithTag(uint8_t type) const;
 
-    void RemoveItem(std::shared_ptr<Item> item);
-	void AddItem(std::shared_ptr<Item> item);
+    void RemoveItem(Item* item);
+	void AddItem(Item* item);
 	void ShowInventory() const;
 
 private:
-    std::vector<std::shared_ptr<Item>> items;
+    std::vector<Item*> items;
 };

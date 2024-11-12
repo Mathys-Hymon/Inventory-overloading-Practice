@@ -4,6 +4,10 @@
 
 int main()
 {
-    std::cout << "Hello World!\n";
+	Inventory inventory;
+	inventory.ShowInventory();
+
+	FoodProcessor foodProcessor;
+
     return 0;
 }
