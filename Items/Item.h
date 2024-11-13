@@ -1,5 +1,5 @@
 #pragma once
-#include "ItemType.h"
+#include "../ItemType.h"
 #include "iostream"
 
 class Item
