@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Item.h"
+#include "Items/Item.h"
 #include "VectorExtensions.h"
 #include <vector>
 
@@ -14,7 +14,9 @@ public:
 
     void RemoveItem(Item* item);
 	void AddItem(Item* item);
-	void ShowInventory() const;
+	void ShowInventory();
+
+    void Choice();
 
 private:
     std::vector<Item*> items;
