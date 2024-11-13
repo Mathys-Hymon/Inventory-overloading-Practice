@@ -11,10 +11,10 @@ Inventory::~Inventory()
 }
 
 // Check if the inventory has an item with the given tag
-bool Inventory::HasItemWithTag(uint8_t type) const
+bool Inventory::HasItemWithTag(uint8_t pType) const
 {
-    for (const auto& item : items) {
-        if (item->HasTag(type)) {
+    for (const auto& item : _items) {
+        if (item->HasTag(pType)) {
             return true;
         }
     }
@@ -22,27 +22,38 @@ bool Inventory::HasItemWithTag(uint8_t type) const
 }
 
 // Remove an item from the inventory
-void Inventory::RemoveItem(Item* item)
+void Inventory::RemoveItem(Item* pItem)
 {
-    items -= item;
+    _items -= pItem;
+}
+
+void Inventory::RemoveItem(std::string pItemName)
+{
+	for (const auto& item : _items) {
+		if (item->GetName() == pItemName) {
+			_items -= item;
+			break;
+		}
+	}
+
 }
 
 // Add an item to the inventory
-void Inventory::AddItem(Item* item)
+void Inventory::AddItem(Item* pItem)
 {
     bool isAdded = false;
-    for (int i = items.size(); i > 0; i--)
+    for (int i = _items.size(); i > 0; i--)
     {
-        if (item->GetType() == items[i]->GetType())
+        if (pItem->GetType() == _items[i]->GetType())
         {
-            items.insert(items.begin() + i + 1, item);
+            _items.insert(_items.begin() + i + 1, pItem);
             isAdded = true;
             return;
         }
     }
     if (!isAdded)
     {
-        items += item;
+        _items += pItem;
     }
 }
 
@@ -57,7 +68,7 @@ void Inventory::ShowInventory()
     std::vector<Item*> shield;
 
     // Categorize items based on their type
-    for (const auto& item : items) {
+    for (const auto& item : _items) {
         switch (item->GetType())
         {
         case ItemType::Potion:
@@ -138,74 +149,14 @@ void Inventory::ShowInventory()
     shield.clear();
 }
 
-// Handle user's choice
-void Inventory::Choice()
+ // Get an item from the inventory
+Item* Inventory::GetItem(std::string name)
 {
-    std::cout << "1. Add item\n";
-    std::cout << "2. Remove item\n";
-    std::cout << "3. Show inventory\n";
-    std::cout << "4. Exit\n";
-    std::cout << "Enter your choice: ";
-
-    int choice = -1;
-
-    while (choice == -1)
-    {
-        std::cin >> choice;
-        if (choice < 1 || choice > 4)
-        {
-            std::cout << "Invalid choice, please enter again: ";
-            choice = -1;
-        }
-    }
-    switch (choice)
-    {
-    case 1:
-    {
-        std::cout << "Enter the type of item: ";
-        int type;
-        std::cin >> type;
-        std::cout << "Enter the name of item: ";
-        std::string name;
-        std::cin >> name;
-        std::cout << "Enter the weight of item: ";
-        float weight;
-        std::cin >> weight;
-        std::cout << "Enter the value of item: ";
-        int value;
-        std::cin >> value;
-        std::cout << "Enter the tag of item: ";
-        uint8_t tag;
-        std::cin >> tag;
-        //Item* item = new Item(tag, name, weight, value, tag);
-        //AddItem(item);
-        break;
-    }
-    case 2:
-    {
-        std::cout << "Enter the name of item: ";
-        std::string name;
-        std::cin >> name;
-        for (const auto& item : items) {
-            if (item->GetName() == name) {
-                RemoveItem(item);
-                std::cout << item->GetName() + " Removed successfully ! ";
-                break;
-            }
-        }
-        Choice();
-        break;
-    }
-    case 3:
-    {
-        ShowInventory();
-        break;
-    }
-    case 4:
-    {
-        break;
-    }
-    default:
-        break;
-    }
+	for (const auto& item : _items) {
+		if (item->GetName() == name) {
+			return item;
+		}
+	}
+	return nullptr;
 }
+

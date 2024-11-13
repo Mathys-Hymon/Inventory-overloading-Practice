@@ -128,7 +128,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Inventory.cpp" />
-    <ClCompile Include="Item.cpp" />
+    <ClCompile Include="Items\Childs\Armor.cpp" />
+    <ClCompile Include="Items\Childs\Consumable.cpp" />
+    <ClCompile Include="Items\Childs\Materials.cpp" />
+    <ClCompile Include="Items\Childs\Potion.cpp" />
+    <ClCompile Include="Items\Childs\Shield.cpp" />
+    <ClCompile Include="Items\Childs\Weapon.cpp" />
+    <ClCompile Include="Items\Item.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -136,7 +142,13 @@
     <ClInclude Include="IBakable.h" />
     <ClInclude Include="IFlammable.h" />
     <ClInclude Include="Inventory.h" />
-    <ClInclude Include="Item.h" />
+    <ClInclude Include="Items\Childs\Armor.h" />
+    <ClInclude Include="Items\Childs\Consumable.h" />
+    <ClInclude Include="Items\Childs\Materials.h" />
+    <ClInclude Include="Items\Childs\Potion.h" />
+    <ClInclude Include="Items\Childs\Shield.h" />
+    <ClInclude Include="Items\Childs\Weapon.h" />
+    <ClInclude Include="Items\Item.h" />
     <ClInclude Include="ItemType.h" />
     <ClInclude Include="VectorExtensions.h" />
   </ItemGroup>

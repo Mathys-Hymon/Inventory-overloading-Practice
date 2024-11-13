@@ -10,14 +10,14 @@ public:
     Inventory();
 	~Inventory();
 
-    bool HasItemWithTag(uint8_t type) const;
+    bool HasItemWithTag(uint8_t pType) const;
 
-    void RemoveItem(Item* item);
-	void AddItem(Item* item);
+    void RemoveItem(Item* pItem);
+    void RemoveItem(std::string pItemName);
+	void AddItem(Item* pItem);
 	void ShowInventory();
-
-    void Choice();
+	Item* GetItem(std::string pName);
 
 private:
-    std::vector<Item*> items;
+    std::vector<Item*> _items;
 };
