@@ -25,7 +25,7 @@ std::vector<T>& operator-=(std::vector<T>& vec, const T& element) {
 template <typename T>
 std::vector<T>& operator-=(std::vector<T>& vec, const std::vector<T>& other) {
     for (const auto& element : other) {
-        vec -= element; // Utilise l'opérateur précédent pour chaque élément
+        vec -= element; 
     }
     return vec;
 }

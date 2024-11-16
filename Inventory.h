@@ -20,4 +20,5 @@ public:
 
 private:
     std::vector<Item*> _items;
+	float _maxSize = 100.0f;
 };

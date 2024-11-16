@@ -24,22 +24,19 @@
     <ClCompile Include="Inventory.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Items\Childs\Potion.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Items\Childs\Materials.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Items\Childs\Shield.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Items\Childs\Weapon.cpp">
+    <ClCompile Include="Items\Childs\Consumable.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Items\Childs\Armor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Items\Childs\Consumable.cpp">
+    <ClCompile Include="Items\Childs\Material.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Items\Childs\Potion.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Items\Childs\Weapon.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -65,22 +62,19 @@
     <ClInclude Include="VectorExtensions.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Items\Childs\Potion.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Items\Childs\Materials.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Items\Childs\Weapon.h">
+    <ClInclude Include="Items\Childs\Consumable.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Items\Childs\Armor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Items\Childs\Shield.h">
+    <ClInclude Include="Items\Childs\Material.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Items\Childs\Consumable.h">
+    <ClInclude Include="Items\Childs\Potion.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Items\Childs\Weapon.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

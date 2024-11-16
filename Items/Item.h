@@ -6,9 +6,9 @@ class Item
 {
 public:
 	Item(std::uint8_t type, int price, std::string name);
-	virtual ~Item() = 0;
+    ~Item();
 
-    std::uint8_t GetType();
+    virtual std::uint8_t GetType() = 0;
 	const std::string GetName();
     const bool HasTag(std::uint8_t type);
 	void addTag(std::uint8_t type);

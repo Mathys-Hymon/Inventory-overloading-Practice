@@ -3,6 +3,7 @@
 // Default constructor
 Inventory::Inventory()
 {
+	_items.reserve(1);
 }
 
 // Destructor
@@ -39,21 +40,23 @@ void Inventory::RemoveItem(std::string pItemName)
 }
 
 // Add an item to the inventory
-void Inventory::AddItem(Item* pItem)
-{
+void Inventory::AddItem(Item* pItem) {
     bool isAdded = false;
-    for (int i = _items.size(); i > 0; i--)
-    {
-        if (pItem->GetType() == _items[i]->GetType())
-        {
+
+    // Parcours en partant de la fin, pour ajouter l'élément après le dernier du même type
+    for (int i = _items.size() - 1; i >= 0; --i) {
+        if (_items[i]->GetType() == pItem->GetType()) {
             _items.insert(_items.begin() + i + 1, pItem);
+            std::cout << "item " + pItem->GetName() + " added at index " << i + 1 << "\n";
             isAdded = true;
-            return;
+            break;
         }
     }
-    if (!isAdded)
-    {
+
+    // Si aucun item du même type n'a été trouvé, on utilise _items += pItem
+    if (!isAdded) {
         _items += pItem;
+        std::cout << "item " + pItem->GetName() + " added at the end\n";
     }
 }
 
@@ -64,32 +67,31 @@ void Inventory::ShowInventory()
     std::vector<Item*> potions;
     std::vector<Item*> weapons;
     std::vector<Item*> materials;
+    std::vector<Item*> consummable;
     std::vector<Item*> armor;
     std::vector<Item*> shield;
 
     // Categorize items based on their type
-    for (const auto& item : _items) {
-        switch (item->GetType())
+    for (int i = 0; i < _items.size(); i++) {
+
+        if (_items[i]->HasTag(ItemType::Potion))
         {
-        case ItemType::Potion:
-            potions += item;
-            break;
-        case ItemType::Weapon:
-            weapons += item;
-            break;
-        case ItemType::Materials:
-            materials += item;
-            break;
-        case ItemType::Armor:
-            armor += item;
-            break;
-        case ItemType::Shield:
-            shield += item;
-            break;
-        default:
-            break;
-        }
+			potions += _items[i];
+		}
+		else if (_items[i]->HasTag(ItemType::Weapon))
+		{
+			weapons += _items[i];
+		}
+		else if (_items[i]->HasTag(ItemType::Materials))
+		{
+			materials += _items[i];
+		}
+		else if (_items[i]->HasTag(ItemType::Armor))
+		{
+			armor += _items[i];
+		}
     }
+
 
     // Print the inventory table
     std::cout << "|        Potions        |        Weapons        |       Materials       |        Armors        |        Shields        |"
@@ -100,7 +102,16 @@ void Inventory::ShowInventory()
     for (int i = 0; i < std::max({ potions.size(), weapons.size(), materials.size(), armor.size(), shield.size() }); i++) {
         std::cout << "|";
         if (i < potions.size()) {
+            
+            for (int j = 0; j < (23 - potions[i]->GetName().size()) / 2; j++)
+            {
+				std::cout << " ";
+            }
             std::cout << potions[i]->GetName();
+            for (int j = 0; j < (23 - potions[i]->GetName().size()) / 2; j++)
+            {
+                std::cout << " ";
+            }
         }
         else {
             std::cout << "                       ";
@@ -121,25 +132,47 @@ void Inventory::ShowInventory()
         }
         std::cout << "|";
         if (i < armor.size()) {
-            std::cout << armor[i]->GetName();
+
+            for (int j = 0; j < (23 - armor[i]->GetName().size()) / 2; j++)
+            {
+                std::cout << " ";
+            }
+            std::cout << potions[i]->GetName();
+            for (int j = 0; j < (23 - armor[i]->GetName().size()) / 2; j++)
+            {
+                std::cout << " ";
+            }
         }
         else {
             std::cout << "                      ";
         }
         std::cout << "|";
         if (i < shield.size()) {
-            std::cout << shield[i]->GetName();
+
+            for (int j = 0; j < (23 - shield[i]->GetName().size()) / 2; j++)
+            {
+                std::cout << " ";
+            }
+            std::cout << potions[i]->GetName();
+            for (int j = 0; j < (23 - shield[i]->GetName().size()) / 2; j++)
+            {
+                std::cout << " ";
+            }
         }
         else {
             std::cout << "                       ";
         }
         std::cout << "|\n";
     }
+    std::cout << _items.size() + " / " << _maxSize << " ";
 
-    std::cout << "------------------------------------------------------------------------------------------------------------------------" << std::endl;
+    for (int i = 0; i < 120 - (std::to_string(_items.size()) + " / " + std::to_string(_maxSize) + " ").size(); i++)
+    {
+        std::cout << "-";
+    }
+    //std::cout << "------------------------------------------------------------------------------------------------------------------------" << std::endl;
 
-    // Prompt user for choice
-    Choice();
+    std::cout << "\n\n\n";
 
     // Clear the vectors
     potions.clear();

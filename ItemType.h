@@ -1,4 +1,5 @@
 #pragma once
+#include "string"
 #include <cstdint>
 
 namespace ItemType {
@@ -7,17 +8,23 @@ namespace ItemType {
 		Weapon = 1 << 1,
 		Materials = 1 << 2,
 		Armor = 1 << 3,
-		Shield = 1 << 4,
-		Consumable = 1 << 5,
+		Consumable = 1 << 4,
 
-		Common = 1 << 6,
-		Rare = 1 << 7,
-		Epic = 1 << 8,
+		Common = 1 << 5,
+		Rare = 1 << 6,
+		Epic = 1 << 7,
 	};
 
-	inline uint8_t operator + (uint8_t const& a, Type const& b) {
+	inline uint8_t operator + (uint8_t& a, Type& b) {
 		return a | b;
 	}
+	inline uint8_t operator + (Type& a, uint8_t& b) {
+		return a | b;
+	}
+	inline uint8_t operator + (Type& a, Type& b) {
+		return a | b;
+	}
+
 	inline uint8_t operator - (uint8_t const& a, Type const& b) {
 		return a ^ b;
 	}

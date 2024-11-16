@@ -8,10 +8,8 @@ Item::Item(std::uint8_t type, int price, std::string name)
 	mPrice = price;
 }
 
-std::uint8_t Item::GetType()
+Item::~Item()
 {
-	// Returns the type of the item
-	return mType;
 }
 
 const std::string Item::GetName()

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -130,9 +130,8 @@
     <ClCompile Include="Inventory.cpp" />
     <ClCompile Include="Items\Childs\Armor.cpp" />
     <ClCompile Include="Items\Childs\Consumable.cpp" />
-    <ClCompile Include="Items\Childs\Materials.cpp" />
+    <ClCompile Include="Items\Childs\Material.cpp" />
     <ClCompile Include="Items\Childs\Potion.cpp" />
-    <ClCompile Include="Items\Childs\Shield.cpp" />
     <ClCompile Include="Items\Childs\Weapon.cpp" />
     <ClCompile Include="Items\Item.cpp" />
     <ClCompile Include="main.cpp" />
@@ -144,9 +143,8 @@
     <ClInclude Include="Inventory.h" />
     <ClInclude Include="Items\Childs\Armor.h" />
     <ClInclude Include="Items\Childs\Consumable.h" />
-    <ClInclude Include="Items\Childs\Materials.h" />
+    <ClInclude Include="Items\Childs\Material.h" />
     <ClInclude Include="Items\Childs\Potion.h" />
-    <ClInclude Include="Items\Childs\Shield.h" />
     <ClInclude Include="Items\Childs\Weapon.h" />
     <ClInclude Include="Items\Item.h" />
     <ClInclude Include="ItemType.h" />
