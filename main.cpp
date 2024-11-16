@@ -29,10 +29,12 @@ int main()
 
 void Choice()
 {
+    std::cout << "\n\n\n";
+
     std::cout << "1. Add item\n";
     std::cout << "2. Remove item\n";
     std::cout << "3. Show inventory\n";
-    std::cout << "4. Exit\n";
+    std::cout << "4. Exit\n\n\n";
     std::cout << "Enter your choice: ";
 
     int choice = -1;
@@ -63,14 +65,14 @@ void Choice()
 
 		std::cout << "Enter the name of item: ";
         std::string name;
-        if (name.size() > 20)
+        std::cin >> name;
+        if (name.size() > 10)
         {
             std::cout << "Name is too long\n";
             std::cout << "\n\n\n";
             Choice();
             break;
         }
-        std::cin >> name;
 
 
 

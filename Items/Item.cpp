@@ -21,7 +21,7 @@ const std::string Item::GetName()
 const bool Item::HasTag(std::uint8_t type)
 {
 	// Checks if the item has a specific tag
-	return mType == type;
+	return (mType & type) != 0;
 }
 
 void Item::addTag(std::uint8_t type)

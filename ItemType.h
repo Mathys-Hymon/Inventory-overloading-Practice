@@ -15,13 +15,13 @@ namespace ItemType {
 		Epic = 1 << 7,
 	};
 
-	inline uint8_t operator + (uint8_t& a, Type& b) {
+	inline uint8_t operator+(const uint8_t& a, const Type& b) {
 		return a | b;
 	}
-	inline uint8_t operator + (Type& a, uint8_t& b) {
+	inline uint8_t operator+(const Type& a, const uint8_t& b) {
 		return a | b;
 	}
-	inline uint8_t operator + (Type& a, Type& b) {
+	inline uint8_t operator+(const Type& a, const Type& b) {
 		return a | b;
 	}
 
@@ -33,8 +33,5 @@ namespace ItemType {
 	}
 	inline void operator -= (uint8_t& a, Type const& b) {
 		a ^= b;
-	}
-	inline bool operator == (uint8_t const& a, Type const& b) {
-		return a & b;
 	}
 }

@@ -63,6 +63,14 @@ void Inventory::AddItem(Item* pItem) {
 // Show the inventory
 void Inventory::ShowInventory()
 {
+
+	if (_items.size() == 0)
+	{
+		std::cout << "Inventory is empty\n";
+		return;
+	}
+
+
     // Separate vectors for different item types
     std::vector<Item*> potions;
     std::vector<Item*> weapons;
@@ -78,15 +86,15 @@ void Inventory::ShowInventory()
         {
 			potions += _items[i];
 		}
-		else if (_items[i]->HasTag(ItemType::Weapon))
+	    if (_items[i]->HasTag(ItemType::Weapon))
 		{
 			weapons += _items[i];
 		}
-		else if (_items[i]->HasTag(ItemType::Materials))
+	    if (_items[i]->HasTag(ItemType::Materials))
 		{
 			materials += _items[i];
 		}
-		else if (_items[i]->HasTag(ItemType::Armor))
+	    if (_items[i]->HasTag(ItemType::Armor))
 		{
 			armor += _items[i];
 		}
@@ -94,7 +102,7 @@ void Inventory::ShowInventory()
 
 
     // Print the inventory table
-    std::cout << "|        Potions        |        Weapons        |       Materials       |        Armors        |        Shields        |"
+    std::cout << "|        Potions        |        Weapons        |       Materials       |        Armors        |      Consummable      |"
         << std::endl;
     std::cout << "------------------------------------------------------------------------------------------------------------------------" << std::endl;
 
@@ -103,68 +111,126 @@ void Inventory::ShowInventory()
         std::cout << "|";
         if (i < potions.size()) {
             
-            for (int j = 0; j < (23 - potions[i]->GetName().size()) / 2; j++)
+            int loopNumber = (23 - potions[i]->GetName().size()) / 2;
+
+            for (int j = 0; j < loopNumber; j++)
             {
-				std::cout << " ";
+                std::cout << " ";
             }
             std::cout << potions[i]->GetName();
-            for (int j = 0; j < (23 - potions[i]->GetName().size()) / 2; j++)
+
+            if (potions[i]->GetName().size() % 2 != 0 || potions[i]->GetName().size() == 1)
+            {
+                loopNumber--;
+            }
+
+            for (int j = 0; j < loopNumber; j++)
             {
                 std::cout << " ";
             }
         }
-        else {
-            std::cout << "                       ";
-        }
+        else std::cout << "                       ";
+
         std::cout << "|";
+
         if (i < weapons.size()) {
+            int loopNumber = (23 - weapons[i]->GetName().size()) / 2;
+
+            for (int j = 0; j < loopNumber; j++)
+            {
+                std::cout << " ";
+            }
             std::cout << weapons[i]->GetName();
+
+            if (weapons[i]->GetName().size() % 2 != 0 || weapons[i]->GetName().size() == 1)
+            {
+                loopNumber--;
+            }
+
+            for (int j = 0; j < loopNumber; j++)
+            {
+                std::cout << " ";
+            }
         }
-        else {
-            std::cout << "                       ";
-        }
+        else std::cout << "                       ";
+
         std::cout << "|";
         if (i < materials.size()) {
-            std::cout << materials[i]->GetName();
-        }
-        else {
-            std::cout << "                       ";
-        }
-        std::cout << "|";
-        if (i < armor.size()) {
+            int loopNumber = (23 - materials[i]->GetName().size()) / 2;
 
-            for (int j = 0; j < (23 - armor[i]->GetName().size()) / 2; j++)
+            for (int j = 0; j < loopNumber; j++)
             {
                 std::cout << " ";
             }
-            std::cout << potions[i]->GetName();
-            for (int j = 0; j < (23 - armor[i]->GetName().size()) / 2; j++)
+            std::cout << materials[i]->GetName();
+
+            if (materials[i]->GetName().size() % 2 != 0 || materials[i]->GetName().size() == 1)
+            {
+                loopNumber--;
+            }
+
+            for (int j = 0; j < loopNumber; j++)
             {
                 std::cout << " ";
             }
         }
-        else {
-            std::cout << "                      ";
-        }
+        else std::cout << "                       ";
+
         std::cout << "|";
+
+        if (i < armor.size()) 
+        {
+
+            int loopNumber = (23 - armor[i]->GetName().size()) / 2;
+
+            for (int j = 0; j < loopNumber; j++)
+            {
+                std::cout << " ";
+            }
+            std::cout << armor[i]->GetName();
+
+            if (armor[i]->GetName().size() % 2 != 0 || armor[i]->GetName().size() == 1)
+            {
+                loopNumber--;
+            }
+
+            for (int j = 0; j < loopNumber; j++)
+            {
+                std::cout << " ";
+            }
+        }
+        else std::cout << "                      ";
+
+        std::cout << "|";
+
         if (i < shield.size()) {
 
-            for (int j = 0; j < (23 - shield[i]->GetName().size()) / 2; j++)
+
+            int loopNumber = (23 - shield[i]->GetName().size()) / 2;
+
+            for (int j = 0; j < loopNumber; j++)
             {
                 std::cout << " ";
             }
-            std::cout << potions[i]->GetName();
-            for (int j = 0; j < (23 - shield[i]->GetName().size()) / 2; j++)
+            std::cout << shield[i]->GetName();
+
+
+            if (shield[i]->GetName().size() % 2 != 0 || shield[i]->GetName().size() == 1)
+            {
+                loopNumber--;
+            }
+
+            for (int j = 0; j < loopNumber; j++)
             {
                 std::cout << " ";
             }
         }
-        else {
-            std::cout << "                       ";
-        }
+        else std::cout << "                       ";
+
         std::cout << "|\n";
     }
-    std::cout << _items.size() + " / " << _maxSize << " ";
+
+    std::cout << _items.size() << " / " << _maxSize << " ";
 
     for (int i = 0; i < 120 - (std::to_string(_items.size()) + " / " + std::to_string(_maxSize) + " ").size(); i++)
     {
