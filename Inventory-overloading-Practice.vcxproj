@@ -137,6 +137,7 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="EffectType.h" />
     <ClInclude Include="FoodProcessor.h" />
     <ClInclude Include="IBakable.h" />
     <ClInclude Include="IFlammable.h" />

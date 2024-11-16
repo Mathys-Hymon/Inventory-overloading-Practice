@@ -1,7 +1,7 @@
 #pragma once
 #include "../Item.h"
 
-class Potion : Item
+class Potion : public Item
 {
 public:
 	Potion(std::uint8_t type, int price, std::string name);

@@ -2,7 +2,7 @@
 #include "../Item.h"
 #include "../../IFlammable.h"
 
-class Material : Item, IFlammable
+class Material : public Item, public IFlammable
 {
 public:
 	Material(std::uint8_t type, int price, std::string name);

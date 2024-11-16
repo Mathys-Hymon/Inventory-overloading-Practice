@@ -2,12 +2,11 @@
 #include "FoodProcessor.h"
 #include "Inventory.h"
 
-#include "Items/Childs/Consumable.h"/*
-#include "Items/Childs/Materials.h"
+#include "Items/Childs/Consumable.h"
+#include "Items/Childs/Material.h"
 #include "Items/Childs/Potion.h"
-#include "Items/Childs/Shield.h"
 #include "Items/Childs/Weapon.h"
-#include "Items/Childs/Armor.h"*/
+#include "Items/Childs/Armor.h"
 
 Inventory _inventory;
 
@@ -59,8 +58,13 @@ void Choice()
         // Add item
     case 1:
     {
+		std::cout << "1 - Consumable\n";
+		std::cout << "2 - Materials\n";
+		std::cout << "3 - Potion\n";
+		std::cout << "4 - Weapon\n";
+		std::cout << "5 - Armor\n\n\n";
         std::cout << "Enter the type of item : ";
-		std::string type;
+		int type;
 		std::cin >> type;
 
 		std::cout << "Enter the name of item: ";
@@ -74,59 +78,68 @@ void Choice()
             break;
         }
 
+		int price = rand() % 100 + 1;
+		int rarityInt = rand() % 3 + 1;
+		std::uint8_t tempRarity = 0;
 
+        switch (rarityInt)
+        {
+		case 1:
+			tempRarity = ItemType::Common;
+			break;
+		case 2:
+			tempRarity = ItemType::Rare;
+			break;
+		case 3:
+			tempRarity = ItemType::Epic;
+			break;
 
-        std::uint8_t tags = ItemType::Armor + ItemType::Epic;
+        default:
+            tempRarity = ItemType::Common;
+			break;
 
-        Consumable* consumableItem = new Consumable(tags, 2, name);
-        _inventory.AddItem(consumableItem);
+        }
 
-        Choice();
-        break;
-
-        /* switch (tag)
+         switch (type)
          {
-         case ItemType::Consumable:
+         case 1:
          {
-             Consumable* consumableItem = new Consumable(tag, price, name);
+             Consumable* consumableItem = new Consumable(ItemType::Consumable + tempRarity, price, name);
              _inventory.AddItem(consumableItem);
              break;
-         }*/
-         //case ItemType::Materials:
-         //{
-         //    Materials* materialsItem = new Materials(tag, price, name);
-         //    _inventory.AddItem(materialsItem);
-         //    break;
-         //}
-         //case ItemType::Potion:
-         //{
-         //    Potion* potionItem = new Potion(tag, price, name);
-         //    _inventory.AddItem(potionItem);
-         //    break;
-         //}
-         //case ItemType::Shield:
-         //{
-         //    Shield* shieldItem = new Shield(tag, price, name);
-         //    _inventory.AddItem(shieldItem);
-         //    break;
-         //}
-         //case ItemType::Weapon:
-         //{
-         //    Weapon* weaponItem = new Weapon(tag, price, name);
-         //    _inventory.AddItem(weaponItem);
-         //    break;
-         //}
-         //case ItemType::Armor:
-         //{
-         //    Armor* armorItem = new Armor(tag, price, name);
-         //    _inventory.AddItem(armorItem);
-         //    break;
-         //}
+         }
+         case 2:
+         {
+             Material* materialItem = new Material(ItemType::Materials + tempRarity, price, name);
+             _inventory.AddItem(materialItem);
+             break;
+         }
+         case 3:
+         {
+             Potion* potionItem = new Potion(ItemType::Potion + tempRarity, price, name);
+             _inventory.AddItem(potionItem);
+             break;
+         }
+         case 4:
+         {
+             Weapon* weaponItem = new Weapon(ItemType::Weapon + tempRarity, price, name);
+             _inventory.AddItem(weaponItem);
+             break;
+         }
+         case 5:
+         {
+             Armor* armorItem = new Armor(ItemType::Armor + tempRarity, price, name);
+             _inventory.AddItem(armorItem);
+             break;
+         }
 
-         //default:
-         //    break;
-         //}
-         //break;
+         default:
+             Choice();
+             break;
+         }
+
+		 Choice();
+         break;
     }
     case 2:
     {
