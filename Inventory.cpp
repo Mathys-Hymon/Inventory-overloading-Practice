@@ -43,7 +43,6 @@ void Inventory::RemoveItem(std::string pItemName)
 void Inventory::AddItem(Item* pItem) {
     bool isAdded = false;
 
-    // Parcours en partant de la fin, pour ajouter l'élément après le dernier du même type
     for (int i = _items.size() - 1; i >= 0; --i) {
         if (_items[i]->GetType() == pItem->GetType()) {
             _items.insert(_items.begin() + i + 1, pItem);
@@ -53,7 +52,6 @@ void Inventory::AddItem(Item* pItem) {
         }
     }
 
-    // Si aucun item du même type n'a été trouvé, on utilise _items += pItem
     if (!isAdded) {
         _items += pItem;
         std::cout << "item " + pItem->GetName() + " added at the end\n";
@@ -75,9 +73,8 @@ void Inventory::ShowInventory()
     std::vector<Item*> potions;
     std::vector<Item*> weapons;
     std::vector<Item*> materials;
-    std::vector<Item*> consummable;
+    std::vector<Item*> consumable;
     std::vector<Item*> armor;
-    std::vector<Item*> shield;
 
     // Categorize items based on their type
     for (int i = 0; i < _items.size(); i++) {
@@ -90,7 +87,7 @@ void Inventory::ShowInventory()
 		{
 			weapons += _items[i];
 		}
-	    if (_items[i]->HasTag(ItemType::Materials))
+	    if (_items[i]->HasTag(ItemType::Material))
 		{
 			materials += _items[i];
 		}
@@ -98,100 +95,36 @@ void Inventory::ShowInventory()
 		{
 			armor += _items[i];
 		}
+        if (_items[i]->HasTag(ItemType::Consumable))
+        {
+            consumable += _items[i];
+        }
     }
 
-
+    std::cout << "\n\nRarity : \n\n" << "\033[38;2;173;216;230m" << "Blue" << "\033[0m" << " - Common\n"<<"\033[33m" << "Yellow" << "\033[0m" << " - Rare\n" << "\033[38;2;221;160;221m"  << "Purple"  <<"\033[0m" << " - Epic\n" ;
     // Print the inventory table
-    std::cout << "|        Potions        |        Weapons        |       Materials       |        Armors        |      Consummable      |"
+    std::cout << "\n|        Potions       |       Weapons        |       Materials      |        Armors        |     Consummables     |"
         << std::endl;
-    std::cout << "------------------------------------------------------------------------------------------------------------------------" << std::endl;
+    std::cout << "|----------------------|----------------------|----------------------|----------------------|----------------------|" << std::endl;
 
     // Print each row of the inventory table
-    for (int i = 0; i < std::max({ potions.size(), weapons.size(), materials.size(), armor.size(), shield.size() }); i++) {
+    for (int i = 0; i < std::max({ potions.size(), weapons.size(), materials.size(), armor.size(), consumable.size() }); i++) {
         std::cout << "|";
         if (i < potions.size()) {
             
-            int loopNumber = (23 - potions[i]->GetName().size()) / 2;
+            int loopNumber = (22 - potions[i]->GetName().size()) / 2;
 
             for (int j = 0; j < loopNumber; j++)
             {
                 std::cout << " ";
             }
-            std::cout << potions[i]->GetName();
+
+            std::cout << potions[i]->GetRarity() << potions[i]->GetName() << "\033[0m";
+
 
             if (potions[i]->GetName().size() % 2 != 0 || potions[i]->GetName().size() == 1)
             {
-                loopNumber--;
-            }
-
-            for (int j = 0; j < loopNumber; j++)
-            {
-                std::cout << " ";
-            }
-        }
-        else std::cout << "                       ";
-
-        std::cout << "|";
-
-        if (i < weapons.size()) {
-            int loopNumber = (23 - weapons[i]->GetName().size()) / 2;
-
-            for (int j = 0; j < loopNumber; j++)
-            {
-                std::cout << " ";
-            }
-            std::cout << weapons[i]->GetName();
-
-            if (weapons[i]->GetName().size() % 2 != 0 || weapons[i]->GetName().size() == 1)
-            {
-                loopNumber--;
-            }
-
-            for (int j = 0; j < loopNumber; j++)
-            {
-                std::cout << " ";
-            }
-        }
-        else std::cout << "                       ";
-
-        std::cout << "|";
-        if (i < materials.size()) {
-            int loopNumber = (23 - materials[i]->GetName().size()) / 2;
-
-            for (int j = 0; j < loopNumber; j++)
-            {
-                std::cout << " ";
-            }
-            std::cout << materials[i]->GetName();
-
-            if (materials[i]->GetName().size() % 2 != 0 || materials[i]->GetName().size() == 1)
-            {
-                loopNumber--;
-            }
-
-            for (int j = 0; j < loopNumber; j++)
-            {
-                std::cout << " ";
-            }
-        }
-        else std::cout << "                       ";
-
-        std::cout << "|";
-
-        if (i < armor.size()) 
-        {
-
-            int loopNumber = (23 - armor[i]->GetName().size()) / 2;
-
-            for (int j = 0; j < loopNumber; j++)
-            {
-                std::cout << " ";
-            }
-            std::cout << armor[i]->GetName();
-
-            if (armor[i]->GetName().size() % 2 != 0 || armor[i]->GetName().size() == 1)
-            {
-                loopNumber--;
+                loopNumber++;
             }
 
             for (int j = 0; j < loopNumber; j++)
@@ -203,21 +136,18 @@ void Inventory::ShowInventory()
 
         std::cout << "|";
 
-        if (i < shield.size()) {
-
-
-            int loopNumber = (23 - shield[i]->GetName().size()) / 2;
+        if (i < weapons.size()) {
+            int loopNumber = (22 - weapons[i]->GetName().size()) / 2;
 
             for (int j = 0; j < loopNumber; j++)
             {
                 std::cout << " ";
             }
-            std::cout << shield[i]->GetName();
+            std::cout << weapons[i]->GetRarity() << weapons[i]->GetName() << "\033[0m";
 
-
-            if (shield[i]->GetName().size() % 2 != 0 || shield[i]->GetName().size() == 1)
+            if (weapons[i]->GetName().size() % 2 != 0 || weapons[i]->GetName().size() == 1)
             {
-                loopNumber--;
+                loopNumber++;
             }
 
             for (int j = 0; j < loopNumber; j++)
@@ -225,19 +155,90 @@ void Inventory::ShowInventory()
                 std::cout << " ";
             }
         }
-        else std::cout << "                       ";
+        else std::cout << "                      ";
+
+        std::cout << "|";
+        if (i < materials.size()) {
+            int loopNumber = (22 - materials[i]->GetName().size()) / 2;
+
+            for (int j = 0; j < loopNumber; j++)
+            {
+                std::cout << " ";
+            }
+            std::cout << materials[i]->GetRarity() << materials[i]->GetName()  << "\033[0m";
+
+            if (materials[i]->GetName().size() % 2 != 0 || materials[i]->GetName().size() == 1)
+            {
+                loopNumber++;
+            }
+
+            for (int j = 0; j < loopNumber; j++)
+            {
+                std::cout << " ";
+            }
+        }
+        else std::cout << "                      ";
+
+        std::cout << "|";
+
+        if (i < armor.size()) 
+        {
+
+            int loopNumber = (22 - armor[i]->GetName().size()) / 2;
+
+            for (int j = 0; j < loopNumber; j++)
+            {
+                std::cout << " ";
+            }
+            std::cout << armor[i]->GetRarity() << armor[i]->GetName() << "\033[0m";
+
+            if (armor[i]->GetName().size() % 2 != 0 || armor[i]->GetName().size() == 1)
+            {
+                loopNumber++;
+            }
+
+            for (int j = 0; j < loopNumber; j++)
+            {
+                std::cout << " ";
+            }
+        }
+        else std::cout << "                      ";
+
+        std::cout << "|";
+
+        if (i < consumable.size()) {
+
+
+            int loopNumber = (22 - consumable[i]->GetName().size()) / 2;
+
+            for (int j = 0; j < loopNumber; j++)
+            {
+                std::cout << " ";
+            }
+            std::cout << consumable[i]->GetRarity() << consumable[i]->GetName() << "\033[0m";
+
+
+            if (consumable[i]->GetName().size() % 2 != 0 || consumable[i]->GetName().size() == 1)
+            {
+                loopNumber++;
+            }
+
+            for (int j = 0; j < loopNumber; j++)
+            {
+                std::cout << " ";
+            }
+        }
+        else std::cout << "                      ";
 
         std::cout << "|\n";
     }
 
     std::cout << _items.size() << " / " << _maxSize << " ";
 
-    for (int i = 0; i < 120 - (std::to_string(_items.size()) + " / " + std::to_string(_maxSize) + " ").size(); i++)
+    for (int i = 0; i < 123 - (std::to_string(_items.size()) + " / " + std::to_string(_maxSize) + " ").size(); i++)
     {
         std::cout << "-";
     }
-    //std::cout << "------------------------------------------------------------------------------------------------------------------------" << std::endl;
-
     std::cout << "\n\n\n";
 
     // Clear the vectors
@@ -245,7 +246,7 @@ void Inventory::ShowInventory()
     weapons.clear();
     materials.clear();
     armor.clear();
-    shield.clear();
+    consumable.clear();
 }
 
  // Get an item from the inventory

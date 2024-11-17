@@ -11,4 +11,5 @@ public:
         // Example: return VegetableStew or MushroomSteak based on ingredient combination
         return nullptr; // Placeholder
     }
+
 };

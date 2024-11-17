@@ -4,7 +4,7 @@
 class Armor : public Item
 {
 public:
-	Armor(std::uint8_t type, int price, std::string name);
+	Armor(std::uint8_t type, int price,int resistance, std::string name);
 
 	virtual std::uint8_t GetType();
 	const std::string GetName();
@@ -15,6 +15,6 @@ public:
 	~Armor();
 
 protected:
-
+	int _resistance;
 };
 

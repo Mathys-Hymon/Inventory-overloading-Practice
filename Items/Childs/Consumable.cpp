@@ -1,12 +1,12 @@
 #include "Consumable.h"
 
-Consumable::Consumable(std::uint8_t type, int price, std::string name) : Item(type, price, name)
+Consumable::Consumable(std::uint8_t pType, std::uint8_t pFoodType, int pPrice, std::string pName) : Item(pType, pPrice, pName), _foodType(pFoodType)
 {
 }
 
 std::uint8_t Consumable::GetType()
 {
-    return mType;
+    return _type;
 }
 
 const std::string Consumable::GetName()
@@ -14,19 +14,19 @@ const std::string Consumable::GetName()
     return Item::GetName();
 }
 
-const bool Consumable::HasTag(std::uint8_t type)
+const bool Consumable::HasTag(std::uint8_t pType)
 {
-	return Item::HasTag(type);
+	return Item::HasTag(pType);
 }
 
-void Consumable::addTag(std::uint8_t type)
+void Consumable::addTag(std::uint8_t pType)
 {
-	Item::addTag(type);
+	Item::addTag(pType);
 }
 
-void Consumable::removeTag(std::uint8_t type)
+void Consumable::removeTag(std::uint8_t pType)
 {
-	Item::removeTag(type);
+	Item::removeTag(pType);
 }
 
 void Consumable::Bake()
@@ -36,7 +36,7 @@ void Consumable::Bake()
 
 uint8_t Consumable::GetFoodType() const
 {
-	return 0;
+	return _foodType;
 }
 
 Consumable::~Consumable()

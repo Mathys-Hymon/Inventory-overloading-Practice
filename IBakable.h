@@ -7,13 +7,13 @@ public:
 	virtual uint8_t GetFoodType() const = 0;
 };
 
-namespace foodtype
+namespace FoodType
 {
 	enum Type {
 		Meat = 1 << 0,
 		Fish = 1 << 1,
 		Mushroom = 1 << 2,
-		Vegetable = 1 << 3,
+		Herb = 1 << 3,
 		Seasoning = 1 << 4,
 	};
 };

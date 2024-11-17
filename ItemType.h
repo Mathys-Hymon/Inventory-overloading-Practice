@@ -6,7 +6,7 @@ namespace ItemType {
 	enum Type {
 		Potion = 1 << 0,
 		Weapon = 1 << 1,
-		Materials = 1 << 2,
+		Material = 1 << 2,
 		Armor = 1 << 3,
 		Consumable = 1 << 4,
 
