@@ -172,7 +172,7 @@ void Choice()
                     }
                     else
                     {
-                        std::cout << "Sorry, this item can't be cooked\n";
+                        std::cout << "Sorry, this item can't be cooked\nWhat do you want to cook instead? : ";
                     }
                 }
 				else if (name == "Cook" && foodBakable.size() < 2)
