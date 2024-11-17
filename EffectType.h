@@ -11,9 +11,30 @@ namespace EffectType {
 		MiningFatigue = 1 << 4,  // Decreases mining speed
 		Strength = 1 << 5,  // Increases melee damage
 		Healing = 1 << 6,  // Instantly restores health
-		Harm = 1 << 7   // Instantly damages health
+		Null = 1 << 7   // noEffects
 	};
-
+        std::string getEffectName(uint8_t effect) {
+            switch (effect) {
+			case Effect::NightVision:
+                    return "NightVision";
+                case Effect::Speed:
+                    return "Speed";
+                case Effect::Slowness:
+                    return "Slowness";
+                case Effect::Haste:
+                    return "Haste";
+                case Effect::MiningFatigue:
+                    return "MiningFatigue";
+                case Effect::Strength:
+                    return "Strength";
+                case Effect::Healing:
+                    return "Healing";
+                case Effect::Null:
+                    return "null";
+                default:
+                    return "Unknown";
+            }
+    }
 	inline uint8_t operator+(const uint8_t& a, const Effect& b) {
 		return a | b;
 	}

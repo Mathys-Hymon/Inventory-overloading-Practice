@@ -9,6 +9,11 @@ Inventory::Inventory()
 // Destructor
 Inventory::~Inventory()
 {
+	for (auto item : _items) {
+		delete item;
+	}
+	_items.clear();
+
 }
 
 // Check if the inventory has an item with the given tag
@@ -103,7 +108,7 @@ void Inventory::ShowInventory()
 
     std::cout << "\n\nRarity : \n\n" << "\033[38;2;173;216;230m" << "Blue" << "\033[0m" << " - Common\n"<<"\033[33m" << "Yellow" << "\033[0m" << " - Rare\n" << "\033[38;2;221;160;221m"  << "Purple"  <<"\033[0m" << " - Epic\n" ;
     // Print the inventory table
-    std::cout << "\n|        Potions       |       Weapons        |       Materials      |        Armors        |     Consummables     |"
+    std::cout << "\n|        Potions       |       Weapons        |       Materials      |        Armors        |     Consumables      |"
         << std::endl;
     std::cout << "|----------------------|----------------------|----------------------|----------------------|----------------------|" << std::endl;
 

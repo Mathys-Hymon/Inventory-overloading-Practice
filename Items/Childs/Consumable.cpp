@@ -31,7 +31,7 @@ void Consumable::removeTag(std::uint8_t pType)
 
 void Consumable::Bake()
 {
-	std::cout << "Baking " << GetName() << std::endl;
+	std::cout << "Add " << GetName() << " to pot" << std::endl;
 }
 
 uint8_t Consumable::GetFoodType() const

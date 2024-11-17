@@ -1,6 +1,7 @@
 #include <iostream>
 #include "FoodProcessor.h"
 #include "Inventory.h"
+#include "vector"
 
 #include "Items/Childs/Consumable.h"
 #include "Items/Childs/Material.h"
@@ -16,6 +17,11 @@ void AddItem(std::string name, int type);
 
 int main()
 {
+    Consumable* mushroom = new Consumable(ItemType::Consumable + ItemType::Rare, FoodType::Mushroom, 20, "Fancy_Mushroom");
+    _inventory.AddItem(mushroom);
+    Consumable* meat = new Consumable(ItemType::Consumable + ItemType::Epic, FoodType::Meat, 20, "Raw_Meat");
+    _inventory.AddItem(meat);
+
     AddItem("Sword", 4);
     AddItem("Bow", 4);
     AddItem("Wood", 2);
@@ -54,7 +60,7 @@ void Choice()
             std::cout << "Invalid choice, please enter again:\n";
             choice = -1;
         }
-        else if (choice < 1 || choice > 4) {
+        else if (choice < 1 || choice > 6) {
             std::cout << "Invalid choice, please enter again:\n";
             choice = -1;
         }
@@ -140,6 +146,60 @@ void Choice()
 	{
 		_inventory.ShowInventory();
 		std::cout << "which item do you want to cook? : ";
+		std::vector<IBakable*> foodBakable;
+        std::vector<Item*> foodItem;
+		std::string name;
+
+        while (name != "Cook")
+        {
+            if (foodBakable.size() < 6)
+            {
+				if (foodBakable.size() > 0) { std::cout << "Do you want to add anything else ? if no type : Cook       "; }
+
+                std::cin >> name;
+                if (name != "Cook")
+                {
+                    if (_inventory.GetItem(name) == nullptr)
+                    {
+                        std::cout << "Sorry, you dont have this item\n";
+                        break;
+                    }
+
+                    if (dynamic_cast<IBakable*>(_inventory.GetItem(name)))
+                    {
+                        foodBakable.push_back(dynamic_cast<IBakable*>(_inventory.GetItem(name)));
+						foodItem.push_back(_inventory.GetItem(name));
+                    }
+                    else
+                    {
+                        std::cout << "Sorry, this item can't be cooked\n";
+                    }
+                }
+				else if (name == "Cook" && foodBakable.size() < 2)
+				{
+					std::cout << "You need to add at least one item to cook\n";
+					name = " ";
+				}
+            }
+			else
+			{
+				name = "You cant add more items !";
+				break;
+			}
+
+        }
+
+		if (foodBakable.size() > 2)
+		{
+            for (int i = 0; i < foodItem.size(); i++)
+            {
+                foodBakable[i]->Bake();
+                _inventory.RemoveItem(foodItem[i]);
+            }
+
+            foodProcessor.Cook(foodBakable);
+		}
+
 		Choice();
 		break;
 	}
@@ -185,38 +245,37 @@ void AddItem(std::string name, int type)
 		std::cout << "\n\n\nType :\n\n";
 		std::cout << "1 - Meat\n";
 		std::cout << "2 - Vegetable\n";
-		std::cout << "3 - Fruit\n";
+		std::cout << "3 - Mushroom\n";
 		std::cout << "4 - Fish\n";
 		std::cout << "5 - Seasoning\n\n";
 
 		std::cout << "Enter the type of food: ";
-        std::string tempFoodName;
+        int tempFoodName;
 		std::cin >> tempFoodName;
 
-		if (tempFoodName == "Meat")
+		if (tempFoodName < 1 || tempFoodName > 5)
 		{
+			tempFoodName = 1;
+		}
+		switch (tempFoodName)
+		{
+		case 1:
 			tempType = FoodType::Meat;
-		}
-		else if (tempFoodName == "Vegetable")
-		{
-			tempType = FoodType::Herb;
-		}
-		else if (tempFoodName == "Fruit")
-		{
+			break;
+		case 2:
+            tempType = FoodType::Herb;
+			break;
+		case 3:
 			tempType = FoodType::Mushroom;
-		}
-		else if (tempFoodName == "Fish")
-		{
+			break;
+		case 4:
 			tempType = FoodType::Fish;
-		}
-		else if (tempFoodName == "Seasoning")
-		{
+			break;
+		case 5:
 			tempType = FoodType::Seasoning;
-		}
-		else
-		{
-			std::cout << "Invalid food type\n";
-			Choice();
+			break;
+		default:
+			tempType = FoodType::Meat;
 			break;
 		}
 
