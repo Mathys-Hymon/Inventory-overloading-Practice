@@ -189,7 +189,7 @@ void Choice()
 
         }
 
-		if (foodBakable.size() > 2)
+		if (foodBakable.size() >= 2)
 		{
             for (int i = 0; i < foodItem.size(); i++)
             {
